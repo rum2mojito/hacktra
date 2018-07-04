@@ -1,0 +1,37 @@
+Request URL: https://tx2.travian.com/dorf1.php
+Request Method: POST
+Status Code: 303 See Other
+Remote Address: 146.0.4.163:443
+Referrer Policy: no-referrer-when-downgrade
+Cache-Control: post-check=0, pre-check=0
+Cache-Control: no-store, no-cache, must-revalidate
+Connection: keep-alive
+Content-Security-Policy: frame-ancestors 'self' www.addictinggames.com;
+Content-Type: text/html; charset=UTF-8
+Date: Fri, 29 Jun 2018 02:57:53 GMT
+Expires: Mon, 26 Jul 1997 05:00:00 GMT
+Last-Modified: Fri, 29 Jun 2018 02:57:53 GMT
+Location: http://tx2.travian.com/dorf1.php
+Pragma: no-cache
+Server: nginx
+Set-Cookie: T3E=W8HTY2BmFZOihLuGA0xdzg%3D%3D%3AeQK1APs582nNbVPsZzR%2FhoPJajt6VOOC7%2BPwKp0v2EiIpP9qWyT41PShK6Jvy6cBVs4khZBnolJQqftsGKq69K8rlvoqiPKxLdgnJNLVMMpYVhCts89980IugvpNlycWDu9FuPfD7e2lNrT3PjgsJQ%3D%3D%3AARgwcnkwpvDXEfUhSO8HPI7dzXYUu0ANZdl2Rn3lbHA%3D; path=/; httponly
+Set-Cookie: lowRes=0; path=/; httponly
+Transfer-Encoding: chunked
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Cache-Control: max-age=0
+Connection: keep-alive
+Content-Length: 85
+Content-Type: application/x-www-form-urlencoded
+Cookie: _ga=GA1.2.816674747.1530178941; _gid=GA1.2.469778817.1530178941; CAD=091fe5b06d59d832%23%23%23%23%23%23; travian-language=en-US; lowRes=0; __gads=ID=325fb8678f4c86f5:T=1530238680:S=ALNI_MYWHQkMvjfaiWUail0HZ-VNPeQX7Q; sess_id=dc0d646e87e5c02f6296c8b8f37d8c2d
+Host: tx2.travian.com
+Origin: https://tx2.travian.com
+Referer: https://tx2.travian.com/login.php
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36
+name: wead3105@sjtu.edu.cn
+password: a98741512
+s1: Login
+w: 1280:720
+login: 1530241061
