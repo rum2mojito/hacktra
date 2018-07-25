@@ -1,8 +1,8 @@
 import travian
 
 url = "https://tx2.travian.com"
-email = 'wead3105@sjtu.edu.cn'
-password = 'a98741512'
+email = '###'
+password = '###'
 tr = travian.travian(url, email, password)
 tr.login_()
 tr.resourceInformation()
