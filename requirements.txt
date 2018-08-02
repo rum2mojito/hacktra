@@ -8,5 +8,4 @@ werkzeug
 xlwt
 sql
 requests
-re
 bs4
