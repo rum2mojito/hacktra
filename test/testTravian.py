@@ -1,8 +1,8 @@
 import travian
 
 url = "https://tx2.travian.com"
-email = '###'
-password = '###'
+email = 'solution@aliyun.com'
+password = 'sjtumorui1027'
 tr = travian.travian(url, email, password)
 tr.login_()
 tr.resourceInformation()
