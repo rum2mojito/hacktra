@@ -6,7 +6,7 @@ import logging
 import env.logConfig
 
 
-class downloadTroopData:
+class getResource:
   def __init__(self, url, troopNum):
     self.url = url
     self.logger = logging.getLogger('getResource.py')
@@ -23,7 +23,7 @@ class downloadTroopData:
         for td in tr:
           ui.append(td.string)
         self.reList.append(ui)
-      return self.listFormat()
+      return True
     except Exception as err:
       self.logger.error(err)
       return False
@@ -52,7 +52,7 @@ class downloadTroopData:
       print(listTable1)
       print(listTable2)
       self.logger.debug('finished')
-      return True
+      return listTable1, listTable2
     except Exception as err:
       self.logger.error(err)
       return False
@@ -141,3 +141,5 @@ class downloadTroopData:
     except Exception as err:
       self.logger.error(err)
       return False
+
+
