@@ -1,4 +1,4 @@
-class resouce:
+class resource:
   def __init__(self, lumber=0, clay=0, iron=0, crop=0):
     self.lumber = lumber
     self.clay = clay

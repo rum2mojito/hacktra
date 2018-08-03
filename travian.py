@@ -216,7 +216,7 @@ class travian:
             'Referer': 'https://tx2.travian.com/login.php',
         }
 
-        self.session = requests.session()
+
 
         baseurl += "/dorf1.php"
 
