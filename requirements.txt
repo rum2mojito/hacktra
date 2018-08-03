@@ -9,3 +9,4 @@ xlwt
 sql
 requests
 bs4
+lxml
