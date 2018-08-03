@@ -6,7 +6,7 @@ import logging
 import env.logConfig
 
 
-class downloadTroopData:
+class getResource:
   def __init__(self, url, troopNum):
     self.url = url
     self.logger = logging.getLogger('getResource.py')
@@ -142,10 +142,4 @@ class downloadTroopData:
       self.logger.error(err)
       return False
 
-# if __name__ == '__main__':
-#   url = "https://t4.answers.travian.com/index.php?view=answers&action=answer&cid=203"
-#   re = downloadTroopData(url)
-#   #re.checkLink(url)
-#   re.getContent(url)
-#   # print(re.reList)
-#   #re.listFormat()
+
