@@ -38,7 +38,7 @@ class getResource:
     for i in range(len(self.reList)):
       if self.reList[i][0] == '1':
         start = i
-        break;
+        break
     while(start < len(self.reList)):
       tmpList.append(self.reList[start][2*col])
       col += 1
