@@ -23,7 +23,7 @@ class getResource:
         for td in tr:
           ui.append(td.string)
         self.reList.append(ui)
-      return True
+      return self.listFormat()
     except Exception as err:
       self.logger.error(err)
       return False
