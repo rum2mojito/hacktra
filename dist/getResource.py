@@ -52,7 +52,7 @@ class getResource:
       print(listTable1)
       print(listTable2)
       self.logger.debug('finished')
-      return listTable1, listTable2
+      return True
     except Exception as err:
       self.logger.error(err)
       return False
