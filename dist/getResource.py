@@ -6,7 +6,7 @@ import logging
 import env.logConfig
 
 
-class downloadTroopData:
+class getResource:
   def __init__(self, url, troopNum):
     self.url = url
     self.logger = logging.getLogger('getResource.py')
@@ -141,3 +141,5 @@ class downloadTroopData:
     except Exception as err:
       self.logger.error(err)
       return False
+
+
