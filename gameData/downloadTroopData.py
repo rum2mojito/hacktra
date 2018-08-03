@@ -52,7 +52,7 @@ class downloadTroopData:
       print(listTable1)
       print(listTable2)
       self.logger.debug('finished')
-      return listTable1, listTable2
+      return True
     except Exception as err:
       self.logger.error(err)
       return False
@@ -141,11 +141,3 @@ class downloadTroopData:
     except Exception as err:
       self.logger.error(err)
       return False
-
-# if __name__ == '__main__':
-#   url = "https://t4.answers.travian.com/index.php?view=answers&action=answer&cid=203"
-#   re = downloadTroopData(url)
-#   #re.checkLink(url)
-#   re.getContent(url)
-#   # print(re.reList)
-#   #re.listFormat()
