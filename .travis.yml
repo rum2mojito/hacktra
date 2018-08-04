@@ -1,0 +1,19 @@
+language: python
+python:
+  - "3.6"
+  
+# command to install dependencies
+install:
+#  - pip install flask flask_bootstrap flask_wtf wtforms flask_login sql
+  - pip install -r requirements.txt
+  
+# command to run tests
+branches:
+  only: 
+    - master
+    
+before_script:
+  - export PYTHONPATH=$PYTHONPATH:$(pwd)
+  
+script:
+  - python test/*

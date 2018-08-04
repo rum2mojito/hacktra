@@ -1,1 +1,6 @@
-.idea
+log
+log.txt
+test.db
+__pycache__/
+.idea/
+.db
