@@ -15,9 +15,9 @@ class test(unittest.TestCase):
       troopName = re.nameJudge(troop)
       print('Data of ' + troopClass + '(' + troopName + ')')
       re.getContent(url)
-      if(re.getContent(url) != ''):
+      '''if(re.getContent(url) != ''):
         self.flag = True
-      self.assertEquals(self.flag, True)
+      self.assertEquals(self.flag, True)'''
 
 if __name__ == '__main__':
   unittest.main()
