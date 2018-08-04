@@ -18,8 +18,7 @@ class testDownloadData(unittest.TestCase):
        flag = True
       self.assertEquals(self.flag, True)
 
-if __name__ == '__main__':
-  unittest.main()
+unittest.main()
 
 '''import unittest
 
