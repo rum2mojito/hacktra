@@ -15,7 +15,8 @@ class testDownloadData(unittest.TestCase):
       print('Data of ' + troopClass + '(' + troopName + '):')
       re.getContent(url)
       if(re.getContent(url) != False):
-       flag = True
+       self.flag = True
       self.assertEquals(self.flag, True)
 
-unittest.main()
+if __name__ == '__main__':
+  unittest.main()
