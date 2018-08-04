@@ -6,10 +6,10 @@ import logging
 import env.logConfig
 
 
-class downloadTroopData:
+class getResource:
   def __init__(self, url, troopNum):
     self.url = url
-    self.logger = logging.getLogger('downloadTroopData.py')
+    self.logger = logging.getLogger('getResource.py')
     self.reList = []
     self.troopNum = troopNum
 
@@ -46,12 +46,12 @@ class downloadTroopData:
           or globalVar.TROOPTYPE[self.troopNum] == '221' or globalVar.TROOPTYPE[self.troopNum] == '222'
           or globalVar.TROOPTYPE[self.troopNum] == '232'or globalVar.TROOPTYPE[self.troopNum] == '233'):
         print(listTable1)
-        #return listTable1, listTable2
-        return True
+        return listTable1, listTable2
       else:
         listTable2 = self.getTable2(startTable2)
       print(listTable1)
       print(listTable2)
+      self.logger.debug('finished')
       return True
     except Exception as err:
       self.logger.error(err)
@@ -141,3 +141,5 @@ class downloadTroopData:
     except Exception as err:
       self.logger.error(err)
       return False
+
+
