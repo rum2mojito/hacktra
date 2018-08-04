@@ -46,7 +46,8 @@ class downloadTroopData:
           or globalVar.TROOPTYPE[self.troopNum] == '221' or globalVar.TROOPTYPE[self.troopNum] == '222'
           or globalVar.TROOPTYPE[self.troopNum] == '232'or globalVar.TROOPTYPE[self.troopNum] == '233'):
         print(listTable1)
-        return listTable1, listTable2
+        #return listTable1, listTable2
+        return True
       else:
         listTable2 = self.getTable2(startTable2)
       print(listTable1)
