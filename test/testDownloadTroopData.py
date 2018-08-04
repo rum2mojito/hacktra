@@ -19,21 +19,3 @@ class testDownloadData(unittest.TestCase):
       self.assertEquals(self.flag, True)
 
 unittest.main()
-
-'''import unittest
-
-from gameData.downloadTroopData import downloadTroopData
-
-class TestDAO(unittest.TestCase):
-  def test_connection(self):
-    troop = 0
-    url = "https://t4.answers.travian.com/index.php?view=answers&action=answer&cid=203"
-    re = downloadTroopData(url, troop)
-    re.getContent(url)
-    #self.assertEquals(re.getContent(url), True)
-    if(re.getContent(url) != ''):
-      self.flag = True
-    self.assertEquals(True, self.flag)
-
-if __name__ == '__main__':
-  unittest.main()'''
