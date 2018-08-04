@@ -3,6 +3,7 @@ from urllib.request import urlopen
 import requests
 import globalVar
 import logging
+from dist import troop
 import env.logConfig
 
 
@@ -23,7 +24,7 @@ class downloadTroopData:
         for td in tr:
           ui.append(td.string)
         self.reList.append(ui)
-      return self.listFormat()
+      return self.wrieToTroop()
     except Exception as err:
       self.logger.error(err)
       return False
@@ -46,16 +47,34 @@ class downloadTroopData:
           or globalVar.TROOPTYPE[self.troopNum] == '221' or globalVar.TROOPTYPE[self.troopNum] == '222'
           or globalVar.TROOPTYPE[self.troopNum] == '232'or globalVar.TROOPTYPE[self.troopNum] == '233'):
         print(listTable1)
-        #return listTable1, listTable2
-        return True
+        return listTable1, listTable2
       else:
         listTable2 = self.getTable2(startTable2)
       print(listTable1)
       print(listTable2)
-      return True
+      return listTable1, listTable2
     except Exception as err:
       self.logger.error(err)
       return False
+
+  def wrieToTroop(self):
+    (listTable1, listTable2) = self.listFormat()
+    for ele in range(len(listTable1)):
+      if(listTable1[ele] == 'Research'):
+        startRes = ele + 1
+      elif(listTable1[ele] == 'Training'):
+        startTraining = ele +1
+      elif(listTable1[ele] == 'Velocity'):
+        startVel = ele +1
+      elif(listTable1[ele] == 'Can carry'):
+        startCarry = ele + 1
+        break
+    '''race, name, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
+               trainLumber, trainClay, trainIron, trainCrop, xCropTrain, trainTime, velocity, carry,
+               level, needLumber, needClay, needIron, needCrop, trainTimeLevel1, trainTimeLevel20'''
+    #read table1
+
+    return True
 
   def getTable1(self, startRow):
     try:

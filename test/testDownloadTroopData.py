@@ -12,10 +12,10 @@ class testDownloadData(unittest.TestCase):
       re = downloadTroopData.downloadTroopData(url, troop)
       troopClass = re.classJudge(troop)
       troopName = re.nameJudge(troop)
-      print('Data of ' + troopClass + '(' + troopName + ')')
+      print('Data of ' + troopClass + '(' + troopName + '):')
       re.getContent(url)
       if(re.getContent(url) != False):
-        self.flag = True
+       flag = True
       self.assertEquals(self.flag, True)
 
 if __name__ == '__main__':

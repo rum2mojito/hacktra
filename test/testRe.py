@@ -1,4 +1,4 @@
-'''import sys
+import sys
 sys.path.append('home/parallels/Downloads/hacktra/gameData')
 from gameData import downloadTroopData
 import unittest
@@ -10,4 +10,4 @@ for troop in range(len(globalVar.TROOPTYPE)):
   troopClass = re.classJudge(troop)
   troopName = re.nameJudge(troop)
   print('Data of '+ troopClass + '(' + troopName + ')')
-  re.getContent(url)'''
+  re.getContent(url)
