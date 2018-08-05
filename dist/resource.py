@@ -12,4 +12,4 @@ class resource:
     self.crop = crop
     
   def getResource(self):
-    return [self.lumber, self.clay, self.iron, self.crop]
+    return [self.lumber, self.clay, self.iron, self.crop] 

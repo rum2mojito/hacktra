@@ -21,9 +21,20 @@ class downloadTroopData:
       trs = soup.find_all('tr')
       for tr in trs:
         ui = []
-        for td in tr:
-          ui.append(td.string)
+        tds = tr.find_all('td')
+        # print (tds)
+        for td in tds:
+          strongs = td.find_all('strong')
+          if (len(strongs) > 0):
+            ui.append(strongs[0].string)
+          else:
+            ui.append(td.get_text())
         self.reList.append(ui)
+        # ui = []
+        # for td in tr:
+        #   ui.append(td.string)
+        # self.reList.append(ui)
+      print (self.reList)
       return self.wrieToTroop()
     except Exception as err:
       self.logger.error(err)
