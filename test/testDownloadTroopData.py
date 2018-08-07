@@ -14,7 +14,6 @@ class testDownloadData(unittest.TestCase):
       troopName = re.nameJudge(troop)
       #print('Data of ' + troopClass + '(' + troopName + '):')
       self.flag = False
-      #re.getContent(url)
       if(re.getContent(url) != False):
        self.flag = True
       self.assertEquals(self.flag, True)

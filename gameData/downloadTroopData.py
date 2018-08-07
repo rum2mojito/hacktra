@@ -7,7 +7,6 @@ import re
 from dist.troop import troop
 import env.logConfig
 
-
 class downloadTroopData:
   def __init__(self, url, troopNum):
     self.url = url
@@ -29,21 +28,23 @@ class downloadTroopData:
         for td in tr:
           self.ui.append(td.string)
         self.reList.append(self.ui)
-        # print(self.reList)
+      #print(self.reList)
       return self.writeToTroop()
-      # return True
     except Exception as err:
       self.logger.error(err)
       return False
 
   def listFormat(self):
     try:
+      startAttack = 0
       startTable1 = 0
       startTable2 = 0
       endTable1 = 0
       listTable2 = []
 
       for i in range(len(self.reList)):
+        if self.reList[i][0] == 'Value at troop level 0':
+          startAttack = i
         if self.reList[i][0] == 'Research':
           startTable1 = i
         if self.reList[i][0] == 'Can carry':
@@ -52,24 +53,34 @@ class downloadTroopData:
           startTable2 = i
           break
 
+      listAttack = self.getAttack(startAttack)
+
       listTable1 = self.getTable1(startTable1, endTable1)
       if(globalVar.TROOPTYPE[self.troopNum] == '210' or globalVar.TROOPTYPE[self.troopNum] == '211'
           or globalVar.TROOPTYPE[self.troopNum] == '221' or globalVar.TROOPTYPE[self.troopNum] == '222'
           or globalVar.TROOPTYPE[self.troopNum] == '232'or globalVar.TROOPTYPE[self.troopNum] == '233'):
-        print(listTable1)
-        return listTable1, listTable2
+        #print(listTable1)
+        #print(listTable1)
+        return listTable1, listTable2, listAttack
       else:
         listTable2 = self.getTable2(startTable2)
       '''print(listTable1)
       print(listTable2)'''
-      return listTable1, listTable2
+      #print(listTable1)
+      return listTable1, listTable2, listAttack
     except Exception as err:
       self.logger.error(err)
       return False
 
   def writeToTroop(self):
     try:
-      (listTable1, listTable2) = self.listFormat()
+      startRes = 0
+      startTraining = 0
+      startVel = 0
+      startCarry = 0
+
+      (listTable1, listTable2, listAttack) = self.listFormat()
+      # print(len(listTable2))
       for ele in range(len(listTable1)):
         if(listTable1[ele] == 'Research'):
           startRes = ele + 1
@@ -106,7 +117,7 @@ class downloadTroopData:
         troop.xCropRes = 0
       else:
         troop.xCropTrain = int(troop.xCropTrain)
-      if (troop.resTime == '/'):
+      if (troop.resTime == '/' or troop.resTime == None):
         troop.resTime = 0
       else:
         troop.trainTime = self.timeToSecond(troop.trainTime)
@@ -125,7 +136,7 @@ class downloadTroopData:
         troop.carry = int(troop.carry[slash+1] + troop.carry[slash+1])
       else:
         troop.carry = int(troop.carry[0])
-      #print(troop.carry)
+
       #read table2
       level = [0] * 20
       lumber = [0] * 20
@@ -135,13 +146,13 @@ class downloadTroopData:
       timeL1 = [0] * 20
       timeL2 = [0] * 20
       if(len(listTable2) == 0):
-        return level, lumber, clay, iron, crop
+        return level, lumber, clay, iron, crop, timeL1, timeL2
       else:
-        #lenList = len(listTable2)
-        col = 0
         for row in range(20):
-          #insert = int(listTable2[7*row]) - 1
-          level[row] = int((listTable2[7*row]))
+          if(level[row] == None):
+            level[row] = 0
+          else:
+            level[row] = int((listTable2[7*row]))
           if (listTable2[7 * row + 1] == None):
             lumber[row] = 0
           else:
@@ -166,16 +177,17 @@ class downloadTroopData:
             timeL1[row] = 0
           else:
             timeL1[row] = self.timeToSecond(listTable2[7*row + 5])
-          # skip \xa0
-          timeStr = listTable2[7*row + 6]
-          timeStr = "".join(timeStr.split())
-          if(len(timeStr) == 0):
+
+          if(listTable2[7*row + 6] == None) :
             timeL2[row] = 0
           else:
-            timeL2[row] = self.timeToSecond(timeStr)
-          col += 1
-          if(col == 7):
-            col = 0
+            # skip \xa0
+            timeStr = listTable2[7 * row + 6]
+            timeStr = "".join(timeStr.split())
+            if (len(timeStr) == 0):
+              timeL2[row] = 0
+            else:
+              timeL2[row] = self.timeToSecond(timeStr)
       return True
     except Exception as err:
       self.logger.error(err)
@@ -206,6 +218,16 @@ class downloadTroopData:
       self.logger.error(err)
       return False
 
+  def getAttack(self, startRow):
+    try:
+      listAttack = []
+      for col in range(4):
+        listAttack.append(self.reList[startRow][2 * col])
+      return listAttack
+    except Exception as err:
+      self.logger.error(err)
+      return False
+
   def getTable1(self, startRow, endRow):
     try:
       listTable = []
@@ -221,8 +243,6 @@ class downloadTroopData:
         if(startRow < startOriginal + startBias):
           if(self.reList[startRow][0] == 'Training (T2.5) '):
             #jump to next row
-            #print(startRow)
-            #print("Training T2.5")
             startRow += 1
           else:
             listTable.append(self.reList[startRow][2 * col])
