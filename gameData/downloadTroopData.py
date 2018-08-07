@@ -188,6 +188,17 @@ class downloadTroopData:
               timeL2[row] = 0
             else:
               timeL2[row] = self.timeToSecond(timeStr)
+      troop.level = level
+      troop.needLumber = lumber
+      troop.needClay = clay
+      troop.needIron = iron
+      troop.needCrop = crop
+      troop.trainTimeL1 = timeL1
+      troop.trainTimeL2 = timeL2
+      # read attack and defense
+      troop.attack = int(listAttack[1])
+      troop.infantry = int(listAttack[2])
+      troop.cavalry = int(listAttack[3])
       return True
     except Exception as err:
       self.logger.error(err)

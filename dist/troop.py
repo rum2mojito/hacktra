@@ -1,7 +1,7 @@
 class troop:
   def __init__(self, race, name, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
                trainLumber, trainClay, trainIron, trainCrop, xCropTrain, trainTime, velocity, carry,
-               level, needLumber, needClay, needIron, needCrop, trainTimeLevel1, trainTimeLevel20):
+               level, needLumber, needClay, needIron, needCrop, trainTimeLevel1, trainTimeLevel20, attack, infantry, cavalry):
     self.race = race
     self.name = name
     #Table1 Research
@@ -23,12 +23,16 @@ class troop:
     self.carry = carry
     #Table2
     self.level = level
-    self.lumber = needLumber
-    self.clay = needClay
-    self.iron = needIron
-    self.crop = needCrop
+    self.needLumber = needLumber
+    self.needClay = needClay
+    self.needIron = needIron
+    self.needCrop = needCrop
     self.trainTimeL1 = trainTimeLevel1
     self.trainTimeL2 = trainTimeLevel20
+    # ATTACK & DEFENSE
+    self.attack = attack
+    self.infantry = infantry
+    self.cavalry = cavalry
 
   def train(self, number, lumber, clay, iron, crop):
     if (self.lumber*number >= lumber and self.clay*number >= clay and
