@@ -5,10 +5,11 @@ sys.path.append('home/parallels/Downloads/hacktra/gameData')
 from gameData.downloadTroopData import downloadTroopData
 import globalVar
 
-for troop in range(len(globalVar.TROOPTYPE)):
-  url = globalVar.TROOPURL + globalVar.TROOPTYPE[troop]
-  re = downloadTroopData(url, troop)
-  troopClass = re.classJudge(troop)
-  troopName = re.nameJudge(troop)
+for cid in sorted(globalVar.TROOPTYPE.keys()):
+  # url = globalVar.TROOPURL + globalVar.TROOPTYPE[troop]
+  url = globalVar.TROOPURL + globalVar.TROOPTYPE[cid]
+  re = downloadTroopData(url, cid)
+  troopClass = re.classJudge(cid)
+  troopName = re.nameJudge(cid)
   print('Data of ' + troopClass + '(' + troopName + '):')
   re.getContent(url)

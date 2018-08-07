@@ -1,7 +1,8 @@
 class troop:
-  def __init__(self, race, name, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
+  def __init__(self, cid, race, name, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
                trainLumber, trainClay, trainIron, trainCrop, xCropTrain, trainTime, velocity, carry,
                level, needLumber, needClay, needIron, needCrop, trainTimeLevel1, trainTimeLevel20, attack, infantry, cavalry):
+    self.cid = cid
     self.race = race
     self.name = name
     #Table1 Research

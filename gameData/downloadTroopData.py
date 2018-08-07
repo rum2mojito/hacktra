@@ -288,16 +288,22 @@ class downloadTroopData:
       self.logger.error(err)
       return False
 
-  def classJudge(self, troop):
-    if((globalVar.TROOPTYPE[troop] >= '203' and globalVar.TROOPTYPE[troop] <='211') or globalVar.TROOPTYPE[troop] == '7'):
-      troopClass = 'Gauls'
-    elif globalVar.TROOPTYPE[troop] <= '222':
-      troopClass = 'Romans'
-    else:
-      troopClass = 'Teutons'
-    return troopClass
+  def classJudge(self, cid):
+    try:
+      if((globalVar.TROOPTYPE[cid] >= '203' and globalVar.TROOPTYPE[cid] <='211') or globalVar.TROOPTYPE[cid] == '7'):
+        troopClass = 'Gauls'
+      elif globalVar.TROOPTYPE[cid] <= '222':
+        troopClass = 'Romans'
+      else:
+        troopClass = 'Teutons'
+      troop.cid = int(cid)
+      troop.race = troopClass
+      return troopClass
+    except Exception as err:
+      self.logger.error(err)
+      return False
 
-  def nameJudge(self, troop):
+  def nameJudge(self, cid):
     try:
       Guals = ['Phalanx', 'Swordsman', 'Pathfinder', 'Theutates Thunder', 'Druidrider',
                'Haeduan', 'Ram', 'Trebuchet', 'Chieftain', 'Settler']
@@ -307,28 +313,29 @@ class downloadTroopData:
                  'Ram', 'Catapult', 'Chief', 'Settler']
       troopName = ''
 
-      if(self.classJudge(troop) == 'Gauls'):
-        if(globalVar.TROOPTYPE[troop] == '7'):
+      if(self.classJudge(cid) == 'Gauls'):
+        if(globalVar.TROOPTYPE[cid] == '7'):
           troopName = Guals[4]
-        elif(globalVar.TROOPTYPE[troop] <= '206'):
-          indexGauls = int(globalVar.TROOPTYPE[troop]) - 203
+        elif(globalVar.TROOPTYPE[cid] <= '206'):
+          indexGauls = int(globalVar.TROOPTYPE[cid]) - 203
           troopName = Guals[indexGauls]
-        elif(globalVar.TROOPTYPE[troop] >= '207'):
-          indexGauls = int(globalVar.TROOPTYPE[troop]) - 202
+        elif(globalVar.TROOPTYPE[cid] >= '207'):
+          indexGauls = int(globalVar.TROOPTYPE[cid]) - 202
           troopName = Guals[indexGauls]
         else:
           print('error in Gauls')
-      elif(self.classJudge(troop) == 'Romans'):
-        if(globalVar.TROOPTYPE[troop] == '212'):
+      elif(self.classJudge(cid) == 'Romans'):
+        if(globalVar.TROOPTYPE[cid] == '212'):
           troopName = Romans[0]
         else:
-          indexRomans = int(globalVar.TROOPTYPE[troop]) - 213
+          indexRomans = int(globalVar.TROOPTYPE[cid]) - 213
           troopName = Romans[indexRomans]
-      elif(self.classJudge(troop) == 'Teutons'):
-        indexTeutons = int(globalVar.TROOPTYPE[troop]) - 224
+      elif(self.classJudge(cid) == 'Teutons'):
+        indexTeutons = int(globalVar.TROOPTYPE[cid]) - 224
         troopName = Teutons[indexTeutons]
       else:
         print('error in nameJudge')
+      troop.name = troopName
       return troopName
     except Exception as err:
       self.logger.error(err)
