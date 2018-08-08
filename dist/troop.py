@@ -1,9 +1,13 @@
 class troop:
-  def __init__(self, race, name, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
+  def __init__(self, race, cid, name, attack, infantry, cavalry, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
                trainLumber, trainClay, trainIron, trainCrop, xCropTrain, trainTime, velocity, carry,
                level, needLumber, needClay, needIron, needCrop, trainTimeLevel1, trainTimeLevel20):
     self.race = race
     self.name = name
+    self.attack = attack
+    self.infatry = infantry
+    self.cavalry = cavalry
+    self.cid = cid
     #Table1 Research
     self.resLumber = resLumber
     self.resClay = resClay
@@ -11,6 +15,7 @@ class troop:
     self.resCrop = resCrop
     self.xCropRes = xCropRes
     self.resTime = resTime
+
     #Table1 Training
     self.trainLumber = trainLumber
     self.trainClay = trainClay
@@ -18,9 +23,11 @@ class troop:
     self.trainCrop = trainCrop
     self.xCropTrain = xCropTrain
     self.trainTime = trainTime
+
     #Table1 Velocity & Carry
     self.velocity = velocity
     self.carry = carry
+
     #Table2
     self.level = level
     self.lumber = needLumber
