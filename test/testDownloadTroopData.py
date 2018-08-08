@@ -7,16 +7,16 @@ import globalVar
 
 class testDownloadData(unittest.TestCase):
   def test_connection(self):
-    for troop in range(len(globalVar.TROOPTYPE)):
-      url = globalVar.TROOPURL + globalVar.TROOPTYPE[troop]
-      re = downloadTroopData(url, troop)
-      troopClass = re.classJudge(troop)
-      troopName = re.nameJudge(troop)
-      print('Data of ' + troopClass + '(' + troopName + '):')
-      # re.getContent(url)
-      if(re.getContent(url) != False):
-       self.flag = True
-      self.assertEquals(True, True)
+    for cid in sorted(globalVar.TROOPTYPE.keys()):
+      url = globalVar.TROOPURL + globalVar.TROOPTYPE[cid]
+      re = downloadTroopData(url, cid)
+      troopClass = re.classJudge(cid)
+      troopName = re.nameJudge(cid)
+      #print('Data of ' + troopClass + '(' + troopName + '):')
+      self.flag = False
+      if (re.getContent(url) != False):
+        self.flag = True
+      self.assertEquals(self.flag, True)
 
 if __name__ == '__main__':
   unittest.main()
