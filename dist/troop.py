@@ -1,3 +1,5 @@
+from metastore.dao.troopDataDAO import troopDataDAO
+
 class troop:
   def __init__(self, cid, race, name, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
                trainLumber, trainClay, trainIron, trainCrop, xCropTrain, trainTime, velocity, carry,
@@ -6,10 +8,12 @@ class troop:
     self.cid = cid
     self.race = race
     self.name = name
+
+    # ATTACK & DEFENSE
     self.attack = attack
-    self.infatry = infantry
+    self.infantry = infantry
     self.cavalry = cavalry
-    self.cid = cid
+
     #Table1 Research
     self.resLumber = resLumber
     self.resClay = resClay
@@ -38,10 +42,6 @@ class troop:
     self.needCrop = needCrop
     self.trainTimeL1 = trainTimeLevel1
     self.trainTimeL2 = trainTimeLevel20
-    # ATTACK & DEFENSE
-    self.attack = attack
-    self.infantry = infantry
-    self.cavalry = cavalry
 
   def train(self, number, lumber, clay, iron, crop):
     if (self.lumber*number >= lumber and self.clay*number >= clay and

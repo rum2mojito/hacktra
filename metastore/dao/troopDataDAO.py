@@ -1,32 +1,33 @@
-from gameData.downloadTroopData import downloadTroopData
+# from gameData.downloadTroopData import downloadTroopData
 from metastore.dao.DAO import DAO
-from dist.troop import troop
+# from dist.troop import troop
 
 class troopDataDAO(DAO):
   def insertUpdateData(self, troop, level):
     query = 'INSERT INTO ' + troop.name
     query += ' VALUES '
-    query += '(NULL, \'' + troop.cid + '\', ' \
-             + troop.Level[level] + '\', \'' \
-             + troop.needLumber[level] + '\', \'' \
-             + troop.needClay[level] + ', \'' \
-             + troop.needIron[level] + '\', \'' \
-             + troop.needCrop[level] + '\', \'' \
-             + troop.needTime[level] + '\')'
+    query += '(NULL, ' + troop.cid + ', ' \
+             + troop.level[level] + ', ' \
+             + troop.needLumber[level] + ', ' \
+             + troop.needClay[level] + ', ' \
+             + troop.needIron[level] + ', ' \
+             + troop.needCrop[level] + ', ' \
+             + troop.trainTimeL1[level] + ', '\
+             + troop.trainTimeL2[level] + ')'
     return self.query(query)
 
   def insertTrainData(self, troop):
     query = 'INSERT INTO ' + 'troop'
     query += ' VALUES '
     query += '(NULL, \'' + troop.cid + '\', ' \
-             + troop.lumber + '\', \'' \
-             + troop.clay + '\', \'' \
-             + troop.iron + ', \'' \
-             + troop.crop + '\', \'' \
+             + troop.trainLumber + '\', \'' \
+             + troop.trainClay + '\', \'' \
+             + troop.trainIron + ', \'' \
+             + troop.trainCrop + '\', \'' \
              + troop.velocity + '\', \'' \
              + troop.carry + '\', \'' \
              + troop.attack + '\', \'' \
-             + troop.infatry + '\', \'' \
+             + troop.infantry + '\', \'' \
              + troop.cavalry + '\', \'' \
              + troop.resLumber + '\', \'' \
              + troop.resClay + '\', \'' \
@@ -61,15 +62,17 @@ class troopDataDAO(DAO):
 
   def createTroopUpdateTable(self, troop):
     try:
-      self.c.execute("""CREATE TABLE """ + troop.name + """ 
+      a = troop.name
+      # fail to create table, need to use dynamic sql
+      self.c.execute("""CREATE TABLE a
                           (Id INTEGER PRIMARY KEY AUTOINCREMENT,
                           Cid text NOT NULL,
-                          Level text NOT NULL
+                          Level text NOT NULL,
                           Lumber text NOT NULL,
                           Clay text NOT NULL,
                           Iron text NOT NULL,
                           Crop text NOT NULL,
-                          Time text NOT NULL
+                          Time text NOT NULL,
                           );""")
       self.logger.info('CREATED TABLE ' + troop.name)
     except Exception as err:

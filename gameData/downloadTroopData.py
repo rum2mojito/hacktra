@@ -6,6 +6,7 @@ import logging
 import re
 from dist.troop import troop
 import env.logConfig
+from metastore.dao.troopDataDAO import troopDataDAO
 
 class downloadTroopData:
   def __init__(self, url, troopNum):
@@ -80,7 +81,6 @@ class downloadTroopData:
       startCarry = 0
 
       (listTable1, listTable2, listAttack) = self.listFormat()
-      # print(len(listTable2))
       for ele in range(len(listTable1)):
         if(listTable1[ele] == 'Research'):
           startRes = ele + 1
@@ -94,100 +94,113 @@ class downloadTroopData:
 
       #read tablel1 research
       (troop.resLumber, troop.resClay, troop.resIron, troop.resCrop, troop.xCropRes, troop.resTime) = listTable1[startRes:startRes+6]
-      troop.resLumber = int(troop.resLumber)
+      '''troop.resLumber = int(troop.resLumber)
       troop.resClay = int(troop.resClay)
       troop.resIron = int(troop.resIron)
-      troop.resCrop = int(troop.resCrop)
+      troop.resCrop = int(troop.resCrop)'''
       if(troop.xCropRes == '/'):
-        troop.xCropRes = 0
-      else:
-        troop.xCropRes = int(troop.xCropRes)
+        troop.xCropRes = '0'
+      '''else:
+        troop.xCropRes = int(troop.xCropRes)'''
       if(troop.resTime == '/'):
-        troop.resTime = 0
+        troop.resTime = '0'
       else:
-        troop.resTime = self.timeToSecond(troop.resTime)
+        troop.resTime = str(self.timeToSecond(troop.resTime))
 
       #read table1 training
       (troop.trainLumber, troop.trainClay, troop.trainIron, troop.trainCrop, troop.xCropTrain, troop.trainTime) = listTable1[startTraining:startTraining+6]
-      troop.trainLumber = int(troop.trainLumber)
+      '''troop.trainLumber = int(troop.trainLumber)
       troop.trainClay = int(troop.trainClay)
       troop.trainIron = int(troop.trainIron)
-      troop.trainCrop = int(troop.trainCrop)
+      troop.trainCrop = int(troop.trainCrop)'''
       if (troop.xCropTrain == '/'):
-        troop.xCropRes = 0
-      else:
-        troop.xCropTrain = int(troop.xCropTrain)
+        troop.xCropRes = '0'
+      '''else:
+        troop.xCropTrain = int(troop.xCropTrain)'''
       if (troop.resTime == '/' or troop.resTime == None):
-        troop.resTime = 0
+        troop.resTime = '0'
       else:
-        troop.trainTime = self.timeToSecond(troop.trainTime)
+        troop.trainTime = str(self.timeToSecond(troop.trainTime))
+
+      # read attack and defense
+      troop.attack = listAttack[1]
+      troop.infantry = listAttack[2]
+      troop.cavalry = listAttack[3]
 
       #read table1 velocity & carry
       troop.velocity = listTable1[startVel]
       troop.carry = listTable1[startCarry]
-      troop.velocity = int(troop.velocity[0])
+      troop.velocity = troop.velocity[0]
       versionFlag = 0
       for ele in range(len(troop.carry)):
         if(troop.carry[ele] == '/'):
           versionFlag = 1
           slash = ele
           break
+
+      for ele in range(len(troop.carry)):
+        if(troop.carry[ele] == 'R'):
+          endCarry = ele - 1
+
       if(versionFlag == 1):
-        troop.carry = int(troop.carry[slash+1] + troop.carry[slash+1])
+        troop.carry = (troop.carry[slash+1] + troop.carry[slash+2])
       else:
-        troop.carry = int(troop.carry[0])
+        i = 1
+        tmpCarry = troop.carry
+        troop.carry = troop.carry[0]
+        while(i < endCarry):
+          troop.carry += tmpCarry[i]
+          i += 1
 
       #read table2
-      level = [0] * 20
-      lumber = [0] * 20
-      clay = [0] * 20
-      iron = [0] * 20
-      crop = [0] * 20
-      timeL1 = [0] * 20
-      timeL2 = [0] * 20
-      if(len(listTable2) == 0):
-        return level, lumber, clay, iron, crop, timeL1, timeL2
-      else:
+      level = ['0'] * 20
+      lumber = ['0'] * 20
+      clay = ['0'] * 20
+      iron = ['0'] * 20
+      crop = ['0'] * 20
+      timeL1 = ['0'] * 20
+      timeL2 = ['0'] * 20
+      if(len(listTable2) != 0):
         for row in range(20):
           if(level[row] == None):
-            level[row] = 0
+            level[row] = '0'
           else:
-            level[row] = int((listTable2[7*row]))
+            level[row] = ((listTable2[7*row]))
           if (listTable2[7 * row + 1] == None):
-            lumber[row] = 0
+            lumber[row] = '0'
           else:
-            lumber[row] = int(listTable2[7 * row + 1])
+            lumber[row] = (listTable2[7 * row + 1])
 
           if(listTable2[7*row + 2] == None):
-            clay[row] = 0
+            clay[row] = '0'
           else:
-            clay[row] = int(listTable2[7*row + 2])
+            clay[row] = (listTable2[7*row + 2])
 
           if (listTable2[7 * row + 3] == None):
-            iron[row] = 0
+            iron[row] = '0'
           else:
-            iron[row] = int(listTable2[7*row + 3])
+            iron[row] = (listTable2[7*row + 3])
 
           if(listTable2[7*row + 4] == None):
-            crop[row] = 0
+            crop[row] = '0'
           else:
-            crop[row] = int(listTable2[7*row + 4])
+            crop[row] = (listTable2[7*row + 4])
 
           if(listTable2[7 * row + 5] == None):
-            timeL1[row] = 0
+            timeL1[row] = '0'
           else:
-            timeL1[row] = self.timeToSecond(listTable2[7*row + 5])
+            timeL1[row] = str(self.timeToSecond(listTable2[7*row + 5]))
 
           if(listTable2[7*row + 6] == None) :
-            timeL2[row] = 0
+            timeL2[row] = '0'
           else:
             # skip \xa0
             timeStr = listTable2[7 * row + 6]
             timeStr = "".join(timeStr.split())
             if (len(timeStr) == 0):
-              timeL2[row] = 0
+              timeL2[row] = '0'
             else:
-              timeL2[row] = self.timeToSecond(timeStr)
+              timeL2[row] = str(self.timeToSecond(timeStr))
       troop.level = level
       troop.needLumber = lumber
       troop.needClay = clay
@@ -195,33 +208,29 @@ class downloadTroopData:
       troop.needCrop = crop
       troop.trainTimeL1 = timeL1
       troop.trainTimeL2 = timeL2
-      # read attack and defense
-      troop.attack = int(listAttack[1])
-      troop.infantry = int(listAttack[2])
-      troop.cavalry = int(listAttack[3])
       return True
     except Exception as err:
       self.logger.error(err)
       return False
 
+  def writeDB(self, troop, tmpDAO):
+    try:
+      tmpDAO.createTroopUpdateTable(troop)
+      tmpDAO.insertTrainData(troop)
+      for level in range(20):
+        tmpDAO.insertUpdateData(troop, level)
+      return True
+    except Exception as err:
+      self.logger.error(err)
+
   def timeToSecond(self, time):
     try:
-      hour = 0
-      minute = 0
-      second = 0
-      lenTime = len(time)
-      for ele in range(lenTime):
-        if(time[ele] == ':' and (lenTime-ele) == 6):
-          colonFirst = ele
-        elif(time[ele] == ':' and (lenTime-ele) == 3):
-          colonSecond = ele
-
-      if (colonFirst == 1):
-        hour = int(time[0])
-      elif (colonFirst == 2):
-        hour = int(time[0] + time[1])
-        minute = int(time[colonFirst + 1] + time[colonFirst + 2])
-        second = int(time[colonSecond + 1] + time[colonSecond + 2])
+      hour = time.split(':', 2)[0]
+      minute = time.split(':', 2)[1]
+      second = time.split(':', 2)[2]
+      hour = int(hour)
+      minute = int(minute)
+      second = int(second)
 
       seconds = 3600*hour + 60*minute +second
       return seconds
@@ -296,7 +305,7 @@ class downloadTroopData:
         troopClass = 'Romans'
       else:
         troopClass = 'Teutons'
-      troop.cid = int(cid)
+      troop.cid = cid
       troop.race = troopClass
       return troopClass
     except Exception as err:
