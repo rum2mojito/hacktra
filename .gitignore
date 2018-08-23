@@ -1,6 +1,7 @@
 log
 log.txt
 test.db
-__pycache__/
-.idea/
-.db
+__pycache__/*
+.idea/*
+*.db
+*.pyc
