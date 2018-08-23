@@ -16,4 +16,4 @@ before_script:
   - export PYTHONPATH=$PYTHONPATH:$(pwd)
   
 script:
-  - python test/*
+  - python3 test/testDownloadTroopData.py
