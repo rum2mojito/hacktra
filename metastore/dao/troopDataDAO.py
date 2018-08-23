@@ -19,21 +19,22 @@ class troopDataDAO(DAO):
   def insertTrainData(self, troop):
     query = 'INSERT INTO ' + 'troop'
     query += ' VALUES '
-    query += '(NULL, \'' + troop.cid + '\', ' \
-             + troop.trainLumber + '\', \'' \
-             + troop.trainClay + '\', \'' \
-             + troop.trainIron + ', \'' \
-             + troop.trainCrop + '\', \'' \
-             + troop.velocity + '\', \'' \
-             + troop.carry + '\', \'' \
-             + troop.attack + '\', \'' \
-             + troop.infantry + '\', \'' \
-             + troop.cavalry + '\', \'' \
-             + troop.resLumber + '\', \'' \
-             + troop.resClay + '\', \'' \
-             + troop.resIron + '\', \'' \
-             + troop.resCrop + '\', \'' \
-             + troop.resTime + '\')'
+    query += '(NULL, ' + troop.cid + ', ' \
+             + troop.trainLumber + ', ' \
+             + troop.trainClay + ', ' \
+             + troop.trainIron + ', ' \
+             + troop.trainCrop + ', ' \
+             + troop.velocity + ', ' \
+             + troop.carry + ', ' \
+             + troop.attack + ', ' \
+             + troop.infantry + ', ' \
+             + troop.cavalry + ', ' \
+             + troop.resLumber + ', ' \
+             + troop.resClay + ', ' \
+             + troop.resIron + ', ' \
+             + troop.resCrop + ', ' \
+             + troop.resTime + ')'
+    a = query
     return self.query(query)
 
   def createTroopTable(self):
@@ -63,8 +64,7 @@ class troopDataDAO(DAO):
   def createTroopUpdateTable(self, troop):
     try:
       a = troop.name
-      # fail to create table, need to use dynamic sql
-      self.c.execute("""CREATE TABLE a
+      self.c.execute("""CREATE TABLE """ + troop.name + """
                           (Id INTEGER PRIMARY KEY AUTOINCREMENT,
                           Cid text NOT NULL,
                           Level text NOT NULL,
@@ -73,6 +73,7 @@ class troopDataDAO(DAO):
                           Iron text NOT NULL,
                           Crop text NOT NULL,
                           Time text NOT NULL,
+                          Time2 text NOT NULL
                           );""")
       self.logger.info('CREATED TABLE ' + troop.name)
     except Exception as err:
