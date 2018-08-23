@@ -1,0 +1,8 @@
+wtforms
+werkzeug
+xlwt
+sql
+requests
+bs4
+lxml
+django
