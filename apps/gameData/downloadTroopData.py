@@ -25,6 +25,20 @@ class downloadTroopData:
       soup = BeautifulSoup(urlopen(url), 'lxml')
       trs = soup.find_all('tr')
       for tr in trs:
+        '''
+         ui = []
+         tds = tr.find_all('td')
+         # print (tds)
+         for td in tds:
+           strongs = td.find_all('strong')
+           if (len(strongs) > 0):
+             ui.append(strongs[0].string)
+           else:
+             ui.append(td.get_text())
+         self.reList.append(ui)
+       print (self.reList)
+       return self.wrieToTroop()
+        '''
         self.ui = []
         for td in tr:
           self.ui.append(td.string)
