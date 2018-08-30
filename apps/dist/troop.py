@@ -1,13 +1,19 @@
+# from metastore.dao.troopDataDAO import troopDataDAO
+
 class troop:
-  def __init__(self, race, cid, name, attack, infantry, cavalry, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
+  def __init__(self, cid, race, name, resLumber, resClay, resIron, resCrop, xCropRes, resTime,
                trainLumber, trainClay, trainIron, trainCrop, xCropTrain, trainTime, velocity, carry,
-               level, needLumber, needClay, needIron, needCrop, trainTimeLevel1, trainTimeLevel20):
+               level, needLumber, needClay, needIron, needCrop, trainTimeLevel1, trainTimeLevel20,
+               attack, infantry, cavalry):
+    self.cid = cid
     self.race = race
     self.name = name
+
+    # ATTACK & DEFENSE
     self.attack = attack
-    self.infatry = infantry
+    self.infantry = infantry
     self.cavalry = cavalry
-    self.cid = cid
+
     #Table1 Research
     self.resLumber = resLumber
     self.resClay = resClay
@@ -30,10 +36,10 @@ class troop:
 
     #Table2
     self.level = level
-    self.lumber = needLumber
-    self.clay = needClay
-    self.iron = needIron
-    self.crop = needCrop
+    self.needLumber = needLumber
+    self.needClay = needClay
+    self.needIron = needIron
+    self.needCrop = needCrop
     self.trainTimeL1 = trainTimeLevel1
     self.trainTimeL2 = trainTimeLevel20
 
